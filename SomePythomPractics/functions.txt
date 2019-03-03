@@ -1,0 +1,36 @@
+
+--- Usable functions in lua --- 
+
+
+-- check within the file exist or not , return true if file exist , false otherwise 
+function file_exists(path)
+  local file = io.open(path, "rb")
+  if file then file:close() end
+  return file ~= nil
+end
+
+--- length of a file --- 
+function length_of_file(filename)
+  local fh = assert(io.open(filename, "rb"))
+  local len = assert(fh:seek("end"))
+  fh:close()
+  return len
+end
+
+
+--- write to file --- 
+function write(filename, contents)
+  local fh = assert(io.open(filename, "wb"))
+  fh:write(contents)
+  fh:flush()
+  fh:close()
+end
+
+--- another function to return a length of a given file .
+function length_of_file(f)
+  local h, len
+  h = openfile(f, "r")
+  len = seek(h, "end")
+  closefile(h)
+  return len
+end
